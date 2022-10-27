@@ -7,10 +7,11 @@ template<typename T>
 struct DefaultConf
 {
     static sf::Font FONT;
-    const static size_t WIDTH, HEIGHT, CELL_WIDTH, FRAMERATELIMIT, START_X, START_Y, END_X, END_Y;
+    const static size_t WIDTH, HEIGHT, CELL_WIDTH, FRAMERATELIMIT, START_X, START_Y, END_X, END_Y, ALERT_DURATION, ALERT_TEXT_SIZE;
     const static sf::Color OUTLINE_COLOR, CELL_COLOR, WALL_COLOR, TEXT_COLOR, START_COLOR, END_COLOR, PATH_COLOR, VISITED_COLOR;
     const static std::string TITLE;
     const static std::string BFS, DIJKSTRA;
+    const static std::string PLAY_TEXT, PAUSE_TEXT, RESET_TEXT;
     
 };
 template<typename T>
@@ -20,9 +21,13 @@ const size_t DefaultConf<T>::WIDTH = 1000;
 template<typename T>
 const size_t DefaultConf<T>::HEIGHT = 500;
 template<typename T>
-const size_t DefaultConf<T>::CELL_WIDTH = 50;
+const size_t DefaultConf<T>::CELL_WIDTH = 10;
 template<typename T>
 const size_t DefaultConf<T>::FRAMERATELIMIT = 30;
+template<typename T>
+const size_t DefaultConf<T>::ALERT_DURATION = 1 * 30;
+template<typename T>
+const size_t DefaultConf<T>::ALERT_TEXT_SIZE = 30;
 template<typename T>
 const size_t DefaultConf<T>::START_X = 0;
 template<typename T>
@@ -50,8 +55,13 @@ const sf::Color DefaultConf<T>::VISITED_COLOR = sf::Color(0, 0, 255);
 template<typename T>
 const std::string DefaultConf<T>::TITLE = "Path Finding";
 template<typename T>
-const std::string DefaultConf<T>::BFS = "bfs";
+const std::string DefaultConf<T>::BFS = "Breadth First Search";
 template<typename T>
-const std::string DefaultConf<T>::DIJKSTRA = "dijkstra";
-
+const std::string DefaultConf<T>::DIJKSTRA = "Dijkstra";
+template<typename T>
+const std::string DefaultConf<T>::PLAY_TEXT = "Play";
+template<typename T>
+const std::string DefaultConf<T>::PAUSE_TEXT = "Pause";
+template<typename T>
+const std::string DefaultConf<T>::RESET_TEXT = "Reset";
 using Conf = DefaultConf<int>;
