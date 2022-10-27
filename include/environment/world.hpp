@@ -13,25 +13,42 @@ struct World{
     std::vector<std::vector<Cell*>> grid;
     std::pair<size_t, size_t> start, end;
     int cell_width;
+    bool is_start_set;
+    bool is_end_set;
 
     World(int width, int height, int cell_width){
         this->grid = std::vector<std::vector<Cell*>>(height, std::vector<Cell*>(width));
         this->cell_width = cell_width;
     }
     void init(){
+        this->is_start_set = false;
+        this->is_end_set = false;
         for(int i = 0; i < grid.size(); i++){
             for(int j = 0; j < grid[0].size(); j++){
                 grid[i][j] = new Cell(j * cell_width, i* cell_width, cell_width, 1);
             }
         }
     }
+    void clear(){
+        for(int i = 0; i < grid.size(); i++){
+            for(int j = 0; j < grid[0].size(); j++){
+                grid[i][j]->update_color();
+            }
+        }
+    }
     void set_start(std::pair<size_t, size_t> pos){
-        start = pos;
-        this->grid[pos.second][pos.first]->change_color(Conf::START_COLOR);
+        this->start.first = pos.first;
+        this->start.second = pos.second;
+        this->grid[pos.second][pos.first]->set_weight(-2);
+        this->is_start_set = true;
+        this->grid[pos.second][pos.first]->update_color();
     }
     void set_end(std::pair<size_t, size_t> pos){
-        end = pos;
-        this->grid[pos.second][pos.first]->change_color(Conf::END_COLOR);
+        this->end.first = pos.first;
+        this->end.second = pos.second;
+        this->grid[pos.second][pos.first]->set_weight(-3);
+        this->is_end_set = true;
+        this->grid[pos.second][pos.first]->update_color();
     }
     void add_wall(std::pair<size_t, size_t> pos){
         this->grid[pos.second][pos.first]->set_weight(-1);
@@ -63,7 +80,7 @@ struct World{
         for(int i = 0; i < grid.size(); i++){
             for(int j = 0; j < grid[0].size(); j++){
                 window.draw(grid[i][j]->shape);
-                if(grid[i][j]->weight != 1 && grid[i][j]->weight != -1){
+                if(grid[i][j]->weight > 1){
                     grid[i][j]->title.setString(std::to_string(grid[i][j]->weight));
                     window.draw(grid[i][j]->title);
                 }

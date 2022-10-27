@@ -27,13 +27,16 @@ bool bfs(World& world, std::queue<std::pair<int, int>>& q, std::vector<std::vect
                         std::vector<std::pair<int, int>> to_change;
                         std::pair<int, int> cur = path[y][x];
                         
-                        while(!world.is_start(std::make_pair(cur.second, cur.first))){
+                        while(!world.is_start(std::make_pair(cur.first, cur.second))){
                             world.grid[cur.first][cur.second]->change_color(Conf::PATH_COLOR);
                             cur = path[cur.first][cur.second];
                         }
                         return true;
                     }
-                    world.grid[y][x]->change_color(Conf::VISITED_COLOR);
+                    if(!world.is_start(std::make_pair(y, x))){
+                        world.grid[y][x]->change_color(Conf::VISITED_COLOR);
+                    }
+                    
                     q.push(std::make_pair(y, x));
                 }
             }

@@ -29,7 +29,7 @@ bool djkstra(World& world, std::priority_queue<std::pair<int, std::pair<int, int
                         std::vector<std::pair<int, int>> to_change;
                         std::pair<int, int> cur = path[y][x];
 
-                        while(!world.is_start(std::make_pair(cur.second, cur.first))){
+                        while(!world.is_start(std::make_pair(cur.first, cur.second))){
                             world.grid[cur.first][cur.second]->change_color(Conf::PATH_COLOR);
                             cur = path[cur.first][cur.second];
                         }

@@ -33,13 +33,19 @@ int main()
         window.clear();
         scene.get_world()->render(window);
         if(scene.show_alert){
-            //std::cout << scene.frame_alert_showed << std::endl;
-            
             scene.render_alert();
             scene.frame_alert_showed++;
             if(scene.is_alert_finished()){
                 scene.show_alert = false;
                 scene.frame_alert_showed = 0;
+            }
+        }
+        if(scene.show_warning){            
+            scene.render_warning();
+            scene.frame_warning_showed++;
+            if(scene.is_warning_finished()){
+                scene.show_warning = false;
+                scene.frame_warning_showed = 0;
             }
         }
         if(!scene.is_path_found() && !scene.is_paused()){

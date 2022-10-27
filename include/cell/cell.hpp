@@ -27,6 +27,17 @@ struct Cell
    void change_color(const sf::Color color){
       this->shape.setFillColor(color);
    }
+   void update_color(){
+      if(this->weight == -2){
+         this->shape.setFillColor(Conf::START_COLOR);
+      }else if(this->weight == -3){
+         this->shape.setFillColor(Conf::END_COLOR);
+      }else if(this->weight == -1){
+         this->shape.setFillColor(Conf::WALL_COLOR);
+      }else{
+         this->shape.setFillColor(Conf::CELL_COLOR);
+      }
+   }
    void set_weight(int weight){
       this->weight = weight;
    }

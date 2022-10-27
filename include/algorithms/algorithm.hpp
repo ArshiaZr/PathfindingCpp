@@ -18,10 +18,15 @@ struct PathFinding{
         this->path = std::vector<std::vector<std::pair<int, int>>>(Conf::HEIGHT, std::vector<std::pair<int, int>>(Conf::WIDTH));
         clear_queue(this->q);
         clear_queue(this->q_weighted);
-        this->q.push(std::make_pair(Conf::START_Y, Conf::START_X));
-        this->q_weighted.push(std::make_pair(0 , std::make_pair(Conf::START_Y, Conf::START_X)));
+        
         //this->visited[Conf::START_Y][Conf::START_X] = true;
     }
+
+    void set_starting_point(World& world){
+        this->q.push(std::make_pair(world.start.second, world.start.first));
+        this->q_weighted.push(std::make_pair(0 , std::make_pair(world.start.second, world.start.first)));
+    }
+
     void clear_queue(std::queue<std::pair<int, int>> &q){
         std::queue<std::pair<int, int>> empty;
         std::swap(q, empty);
